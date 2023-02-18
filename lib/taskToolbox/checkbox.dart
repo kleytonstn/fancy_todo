@@ -11,21 +11,13 @@ class CheckBoxWidgetClass extends State{
   bool isDone = false;
 
   // Create a method that archives task when the checkbox is toggled
-  void toggleCheckBox(bool val){
-    if(val == false){
+  void toggleCheckBox(bool? val){
+    if(val != null){
 
       setState(() {
         isDone = true;
-        //...
       });
-      // TODO(Kleyton): if toggled, move task to archived or scratch text and send it down
-    }
-    // else, if a checked task is unchecked, state returns to being false
-    else{
-      setState(() {
-        isDone = false;
-        //...
-      });
+      // TODO (Kleyton): if toggled, move task to archived or scratch text and send it down
     }
   }
 
@@ -46,6 +38,5 @@ class CheckBoxWidgetClass extends State{
 
         ]);
   }
-
-
 }
+

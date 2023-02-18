@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'Checkbox.dart';
+import 'package:todo_app/taskToolbox/checkbox.dart';
 
 class TaskLayout extends StatelessWidget {
   const TaskLayout({
     Key? key,
     required this.taskName,
   }) : super(key: key);
+
   final String taskName;
 
   @override
@@ -18,14 +19,14 @@ class TaskLayout extends StatelessWidget {
         color: Colors.blue[100],
         alignment: const Alignment(-0.9, 0),
         child: Row(
-          children: const [
-            TaskCheckbox(),
-            Text("... Task"),
+          children: [
+            const TaskCheckbox(),
+            Text(taskName),
           ],
-
         ),
-
       ),
     );
   }
 }
+
+
