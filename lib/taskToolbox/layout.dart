@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:todo_app/taskToolbox/checkbox.dart';
 
-class TaskLayout extends StatelessWidget {
-  const TaskLayout({
+class SingleTaskLayout extends StatelessWidget {
+  const SingleTaskLayout({
     Key? key,
     required this.taskName,
   }) : super(key: key);
@@ -28,5 +28,3 @@ class TaskLayout extends StatelessWidget {
     );
   }
 }
-
-
