@@ -15,17 +15,16 @@ class HomeScreen extends StatelessWidget {
       body: TaskList(),
       floatingActionButton: FloatingActionButton(
           onPressed: () {
+            String taskName =
+                ''; // initializes string to change later according to user-defined input
             showDialog(
                 context: context,
                 builder: (BuildContext context) {
-                  String taskName =
-                      ''; // initializes string to change later according to user-defined input
-
                   return AlertDialog(
                     title: const Text('Add TODO'),
                     content: TextField(
                       onChanged: (value) {
-                        taskName = value; // removing white spaces
+                        taskName = value.trim(); // removing white spaces
                       },
                     ),
                     actions: <Widget>[

@@ -9,7 +9,8 @@ class TaskList extends StatefulWidget {
 }
 
 class TaskListState extends State<TaskList> {
-  List<SingleTaskLayout> tasks_ = List<SingleTaskLayout>.empty();
+  List<SingleTaskLayout> tasks_ = List<SingleTaskLayout>.empty(
+      growable: true); // initializes a list of tasks
 
   @override
   Widget build(BuildContext context) {
