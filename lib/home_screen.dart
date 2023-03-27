@@ -1,8 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:todo_app/taskToolbox/layout.dart';
 import 'package:todo_app/taskToolbox/task_list.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  List<SingleTaskLayout> tasks = [];
 
   @override
   Widget build(BuildContext context) {
@@ -12,19 +20,20 @@ class HomeScreen extends StatelessWidget {
         title: const Text('TODO App'),
         backgroundColor: Colors.blue[100],
       ),
-      body: TaskList(),
+      body: TaskList(task: tasks),
       floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            String taskName =
-                ''; // initializes string to change later according to user-defined input
-            showDialog(
+          onPressed: () async {
+            // asynchronous code, flutter will no execute further instructions before return
+            String taskName = await showDialog(
                 context: context,
                 builder: (BuildContext context) {
+                  var text = '';
                   return AlertDialog(
                     title: const Text('Add TODO'),
                     content: TextField(
                       onChanged: (value) {
-                        taskName = value.trim(); // removing white spaces
+                        text =
+                            value; // updates the text with that inputted by the user
                       },
                     ),
                     actions: <Widget>[
@@ -36,18 +45,18 @@ class HomeScreen extends StatelessWidget {
                       ),
                       TextButton(
                         onPressed: () {
-                          Navigator.of(context).pop();
-                          // search up the widget tree to find the nearest widget that has the state of type _TaskListState,
-                          // then call addTask() on that state obj
-                          (context as Element)
-                              .findAncestorStateOfType<TaskListState>()!
-                              .addTask(taskName);
+                          Navigator.of(context).pop(
+                              text); // pop(text) returns the text to be stored into taskName
                         },
                         child: const Text('Add'),
                       ),
                     ],
                   );
                 });
+            setState(() {
+              tasks.add(SingleTaskLayout(
+                  taskName: taskName)); // updates the state of the Home widget
+            });
           },
           backgroundColor: Colors.blue[900],
           child: const Center(child: Icon(Icons.add))),

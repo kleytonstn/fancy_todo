@@ -1,32 +1,28 @@
 import 'package:flutter/cupertino.dart';
 import 'package:todo_app/taskToolbox/layout.dart';
 
-class TaskList extends StatefulWidget {
-  const TaskList({Key? key}) : super(key: key);
-
-  @override
-  TaskListState createState() => TaskListState();
-}
-
-class TaskListState extends State<TaskList> {
-  List<SingleTaskLayout> tasks_ = List<SingleTaskLayout>.empty(
-      growable: true); // initializes a list of tasks
+class TaskList extends StatelessWidget {
+  const TaskList({Key? key, required this.task}) : super(key: key);
+  final List<SingleTaskLayout> task;
 
   @override
   Widget build(BuildContext context) {
     return ListView(
-      children: tasks_
+        children: task
+            .map((task) => SingleTaskLayout(taskName: task.taskName))
+            .toList());
+  }
+}
+/*
+class TaskListState extends State<TaskList> {
+  @override
+  Widget build(BuildContext context) {
+    return ListView(
+      children: widget.tasks
           .map((task) => SingleTaskLayout(taskName: task.taskName))
           .toList(),
     );
   }
 
-  // update the list calling setState to rebuild the list view
-  void addTask(String taskName) {
-    if (taskName.isNotEmpty) {
-      setState(() {
-        tasks_.add(SingleTaskLayout(taskName: taskName));
-      });
-    }
-  }
-}
+// update the list calling setState to rebuild the list view
+}*/
